@@ -35,3 +35,41 @@ Modern processor architectures rely on hardware-accelerated address translation 
       │             │        │
       ▼             ▼        └──────► [ Re-check & Output ]
 [ Physical Address ] [ Exception Flag ]
+
+📂 Folder Structure
+Plaintext
+
+MMU-Design-Verilog-HDL/
+├── rtl/               # Verilog RTL source files (mmu.v, tlb.v, ptw.v, perm.v)
+├── tb/                # Verification testbench and memory models (mmu_tb.v, mem_bram.v)
+├── constraints/       # XDC constraints for optional FPGA prototyping
+├── simulation/        # Simulation compilation outputs (.vvp executables)
+├── waveforms/         # VCD trace files for waveform inspection
+├── reports/           # Synthesis and utilization reports
+├── docs/              # Architecture diagrams and specifications
+└── README.md          # Project documentation
+
+🚀 Setup & Execution Instructions
+1. Prerequisites
+
+Ensure you have Icarus Verilog (iverilog), the simulation runtime (vvp), and GTKWave installed and added to your system PATH.
+2. Compilation and Simulation (PowerShell)
+
+Open your terminal in the project root directory and execute the following commands:
+PowerShell
+
+# Create simulation output folder if it doesn't exist
+New-Item -ItemType Directory -Force -Path "simulation"
+
+# Compile all RTL modules, memory model, and testbench
+iverilog -g2012 -o simulation/mmu_sim.vvp tb/mmu_tb.v tb/mem_bram.v rtl/tlb.v rtl/ptw.v rtl/perm.v rtl/mmu.v
+
+# Run the simulation executable to generate waveform artifacts
+vvp simulation/mmu_sim.vvp
+
+3. Waveform Analysis
+
+To inspect transaction traces, hit/miss timing, and fault behaviors visually, open the generated VCD file in GTKWave:
+PowerShell
+
+gtkwave mmu.vcd
