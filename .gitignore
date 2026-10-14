@@ -1,0 +1,21 @@
+# Environment Variables & Secrets
+.env
+secrets.h
+
+# Virtual Environments & Python Cache
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Hardware / Simulation Artifacts
+*.vcd
+*.vvp
+*.log
+.Xil/
+
+# IDE & OS System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
